@@ -8,18 +8,20 @@ import { handleAddToCart } from "../tools/CartHandlers";
 import { useCart } from "../tools/CartContext";
 import { useAuthHeader, useIsAuthenticated } from "react-auth-kit";
 
-function ProductPageMobile({ jsonProduct, toggleCart }) {
-  const sanitizedDescription = DOMPurify.sanitize(jsonProduct.description);
+function ProductPageMobile({ productsData, toggleCart }) {
+  const sanitizedDescription = DOMPurify.sanitize(productsData.description);
   const sanitizedOtherIngredients = DOMPurify.sanitize(
-    jsonProduct.otherIngredients
+    productsData.otherIngredients
   );
-  const sanitizedWarning = DOMPurify.sanitize(jsonProduct.warning);
+  const sanitizedWarning = DOMPurify.sanitize(productsData.warning);
   const autha = useAuthHeader();
   const isAuth = useIsAuthenticated();
   const userToken = autha().slice(6);
-  const [currentImage, setCurrentImage] = useState(jsonProduct.firstImage);
+  const [currentImage, setCurrentImage] = useState(productsData.firstImage);
   function handleClick(id) {
-    setCurrentImage(id == 1 ? jsonProduct.firstImage : jsonProduct.secondImage);
+    setCurrentImage(
+      id == 1 ? productsData.firstImage : productsData.secondImage
+    );
   }
   const { dispatch } = useCart();
 
@@ -34,7 +36,7 @@ function ProductPageMobile({ jsonProduct, toggleCart }) {
             <ul className="image-ul-mobile">
               <li
                 className={
-                  currentImage == jsonProduct.firstImage
+                  currentImage == productsData.firstImage
                     ? `small-img-container-mobile active`
                     : `small-img-container-mobile`
                 }
@@ -42,11 +44,11 @@ function ProductPageMobile({ jsonProduct, toggleCart }) {
                   handleClick(1);
                 }}
               >
-                <img className="small-img" src={jsonProduct.firstImage} />
+                <img className="small-img" src={productsData.firstImage} />
               </li>
               <li
                 className={
-                  currentImage == jsonProduct.secondImage
+                  currentImage == productsData.secondImage
                     ? `small-img-container-mobile active`
                     : `small-img-container-mobile`
                 }
@@ -54,37 +56,37 @@ function ProductPageMobile({ jsonProduct, toggleCart }) {
                   handleClick(2);
                 }}
               >
-                <img className="small-img" src={jsonProduct.secondImage} />
+                <img className="small-img" src={productsData.secondImage} />
               </li>
             </ul>
           </div>
           <div className="title">
             <div className="border-element">
-              <h2 className="font-semibold">{jsonProduct.title}</h2>
+              <h2 className="font-semibold">{productsData.title}</h2>
             </div>
             <div className="border-element">
               <ul className="lite-info-ul">
                 <li className="lite-info-li">
-                  First Available: {jsonProduct.firstAvailable}
+                  First Available: {productsData.firstAvailable}
                 </li>
                 <li className="lite-info-li">
-                  Best By: {jsonProduct.expiryDate}
+                  Best By: {productsData.expiryDate}
                 </li>
                 <li className="lite-info-li">
-                  Package Quantity: {jsonProduct.quantity} ML
+                  Package Quantity: {productsData.quantity} ML
                 </li>
                 <li className="lite-info-li">
-                  Shipping Weight: {jsonProduct.weight} Gram
+                  Shipping Weight: {productsData.weight} Gram
                 </li>
               </ul>
             </div>
             <div className="price font-bold">
-              Price: {jsonProduct.priceEg} L.E.
+              Price: {productsData.priceEg} L.E.
             </div>
             <button
               className="cart-btn"
               onClick={() => {
-                handleAddToCart(dispatch, userToken, isAuth(), jsonProduct);
+                handleAddToCart(dispatch, userToken, isAuth(), productsData);
                 toggleCart();
               }}
             >
@@ -100,7 +102,7 @@ function ProductPageMobile({ jsonProduct, toggleCart }) {
             <div className="item-row">
               <h2 className="info-title">Suggested Use</h2>
 
-              <div className="suggested-use">{jsonProduct.suggestedUse}</div>
+              <div className="suggested-use">{productsData.suggestedUse}</div>
               <h2 className="info-title">Other Ingredients</h2>
 
               <div

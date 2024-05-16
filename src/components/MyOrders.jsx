@@ -9,8 +9,18 @@ function MyOrders() {
   const userToken = autha().slice(6);
   const { data, loading, error } = useDataFetching("orders", userToken);
   //add (!) before the loading
+  let ordersData = [];
+  function formatDate(dateString) {
+    const date = new Date(dateString);
 
-  let ordersData = {};
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0"); // Adding 1 to month because January is 0
+    const day = String(date.getDate()).padStart(2, "0");
+
+    const formattedDate = `${day}-${month}-${year}`;
+
+    return formattedDate;
+  }
   console.log(loading);
   console.log(data);
   if (!loading && data) {
@@ -29,16 +39,31 @@ function MyOrders() {
       )}
       {ordersData.length > 0 && (
         <div>
-          {ordersData.map((product, index) => (
-            <div className="my-orders">
-              <div key={index} className="orders-images">
-                <img src={product.firstImage} />
+          <div className="my-orders-container">
+            {ordersData.map((arrayOfProd, index) => (
+              <div className="one-order-container" key={index}>
+                <div className="order-date">
+                  <h2>{formatDate(arrayOfProd[0].date)}</h2>
+                </div>
+                {arrayOfProd.map((product, subIndex) => (
+                  <div className="order-products" key={subIndex}>
+                    <div className="order-details">
+                      <img
+                        src={product.image}
+                        className="orders-images"
+                        alt={product.title}
+                      />
+                      <div className="orders-title">
+                        <h2>{product.title}</h2>
+                        <h2>{product.price} L.E.</h2>
+                      </div>
+                      <div className="order-status">{product.orderStatus}</div>
+                    </div>
+                  </div>
+                ))}
               </div>
-              <div className="orders-title">
-                <h2>{product.title}</h2>
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       )}
     </div>

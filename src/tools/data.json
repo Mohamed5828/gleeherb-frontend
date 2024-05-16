@@ -22,7 +22,7 @@
     "title": "ARGANILLA ARGAN OIL CONDITIONER",
     "previewImage": "https://firebasestorage.googleapis.com/v0/b/blogimgupload-3998a.appspot.com/o/Glee%2FBlack%20Grey%20Minimal%20Color%20Branding%20Inclusive%20Skincare%20Instagram%20Post.png?alt=media&token=610bb7ef-551c-4642-92d5-c1b83489e6a1",
     "firstImage": "https://firebasestorage.googleapis.com/v0/b/blogimgupload-3998a.appspot.com/o/Glee%2FIMG_5823.JPG?alt=media&token=2e4e692f-4672-4db9-8495-a33cf913db3f",
-    "secondImage": "https://firebasestorage.googleapis.com/v0/b/blogimgupload-3998a.appspot.com/o/Glee%2FIMG_5823.JPG?alt=media&token=2e4e692f-4672-4db9-8495-a33cf913db3f",
+    "secondImage": "https://firebasestorage.googleapis.com/v0/b/blogimgupload-3998a.appspot.com/o/Glee%2FIMG_5572.JPG?alt=media&token=5b6766be-2c59-425c-b7a7-14f76005da77",
     "id": 2,
     "weight": 350,
     "quantity": 300,
@@ -48,7 +48,7 @@
     "priceEg": 550,
     "firstAvailable": "December 2024",
     "expiryDate": "December 2027",
-    "productBatch": "S001",
+    "productBatch": "AS001",
     "description": "<p>Promotes Hair Growthin Cases of Damaged Hair Moisturize and Soften Hair Strengthen Hair and Nourish Scalp. <ul><li>No SULFATES</li>NO PARABIENS<li>NO FORMALDEHYDE</li><li>NO DEA</li><li>NO ARTIFICIAL DYES</li><li>NO GLUTEN</li><li>NO PABA</li><li>NO MINERAL OIL</li><li>NO PETROLATUM</li><li>NO PARAFFIN</li><li>NO ANIMAL TESTING</li></ul></p>",
 
     "suggestedUse": "On Clean and Damp Hair, Apply a Small Quantity on Hair of Scalp, Then Rub Gently for 3-5 Minutes, and Repeat the Use as When Needed.",
@@ -58,6 +58,7 @@
   },
   {
     "previewImage": "https://firebasestorage.googleapis.com/v0/b/blogimgupload-3998a.appspot.com/o/Glee%2Fbundles-logo%2F1.png?alt=media&token=a7bb144b-3373-4e47-a0cc-cc999b727fd2",
+    "firstImage": "https://firebasestorage.googleapis.com/v0/b/blogimgupload-3998a.appspot.com/o/Glee%2Fbundles-logo%2F1.png?alt=media&token=a7bb144b-3373-4e47-a0cc-cc999b727fd2",
     "id": 100,
     "title": "Shampoo & Conditioner",
     "priceEg": 950,
@@ -65,23 +66,26 @@
   },
   {
     "previewImage": "https://firebasestorage.googleapis.com/v0/b/blogimgupload-3998a.appspot.com/o/Glee%2Fbundles-logo%2F2.png?alt=media&token=f614ae62-b6b6-4539-89ae-2cdf0edb1d3f",
+    "firstImage": "https://firebasestorage.googleapis.com/v0/b/blogimgupload-3998a.appspot.com/o/Glee%2Fbundles-logo%2F2.png?alt=media&token=f614ae62-b6b6-4539-89ae-2cdf0edb1d3f",
     "id": 101,
     "title": "Shampoo & Serum",
     "priceEg": 1000,
-    "weight": "(350 + 50)"
+    "weight": "(350 + 160)"
   },
   {
     "previewImage": "https://firebasestorage.googleapis.com/v0/b/blogimgupload-3998a.appspot.com/o/Glee%2Fbundles-logo%2F3.png?alt=media&token=c41ea716-749b-4f1b-b591-62e381dbeaad",
+    "firstImage": "https://firebasestorage.googleapis.com/v0/b/blogimgupload-3998a.appspot.com/o/Glee%2Fbundles-logo%2F3.png?alt=media&token=c41ea716-749b-4f1b-b591-62e381dbeaad",
     "id": 102,
     "title": " Conditioner & Serum",
     "priceEg": 1000,
-    "weight": "(350 + 50)"
+    "weight": "(350 + 160)"
   },
   {
     "previewImage": "https://firebasestorage.googleapis.com/v0/b/blogimgupload-3998a.appspot.com/o/Glee%2Fbundles-logo%2F4.png?alt=media&token=ee83717d-8a41-4ad3-8735-219e8b7ada30",
+    "firstImage": "https://firebasestorage.googleapis.com/v0/b/blogimgupload-3998a.appspot.com/o/Glee%2Fbundles-logo%2F4.png?alt=media&token=ee83717d-8a41-4ad3-8735-219e8b7ada30",
     "id": 103,
     "title": "Shampoo, Serum & Conditioner",
     "priceEg": 1400,
-    "weight": "(350 + 50 + 350)"
+    "weight": "(350 + 160 + 350)"
   }
 ]

@@ -15,9 +15,10 @@ import Profile from "./layout/Profile";
 import ScrollToTop from "./tools/ScrollToTop";
 import About from "./layout/About";
 import Contact from "./layout/Contact";
+import CheckoutPage from "./layout/CheckoutPage";
 
 function App() {
-  const [isCartOpen, setIsCartOpen] = useState(true);
+  const [isCartOpen, setIsCartOpen] = useState(false);
 
   function toggleCart() {
     return setIsCartOpen(!isCartOpen);
@@ -56,18 +57,28 @@ function App() {
             <Route path="/address" element={<RegInfo />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/login" element={<LoginPage />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/inquiry" element={<InquiryForm />} />
-            <Route path="/about" element={<About />} />
             <Route
-              path="/payment"
+              path="/profile"
               element={
                 <RequireAuth loginPath="/login">
-                  {/* <StripeApp /> */}
+                  <Profile />
                 </RequireAuth>
               }
             />
-            {/* <Route path="/payment" element={<StripeApp />} /> */}
+            <Route path="/inquiry" element={<InquiryForm />} />
+            <Route path="/about" element={<About />} />
+            <Route
+              path="/checkout"
+              element={
+                <RequireAuth loginPath="/login">
+                  <CheckoutPage />
+                </RequireAuth>
+              }
+            />
+            <Route
+              path="/payment"
+              element={<RequireAuth loginPath="/login"></RequireAuth>}
+            />
           </Routes>
         </Router>
       </CartProvider>

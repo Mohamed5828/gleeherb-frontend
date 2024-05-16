@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect } from "react";
 import { useSignIn as useSignInKit } from "react-auth-kit";
 import { useNavigate } from "react-router-dom";
+import { baseUrl } from "../tools/backendConfig";
 
 function GoogleAuth() {
   const signInKit = useSignInKit();
@@ -13,12 +14,9 @@ function GoogleAuth() {
   }
   async function exchangeGoogleJwtWithToken(googleToken) {
     try {
-      const response = await axios.post(
-        "http://localhost:8080/api/auth/google",
-        {
-          token: `${googleToken}`,
-        }
-      );
+      const response = await axios.post(`${baseUrl}/api/auth/google`, {
+        token: `${googleToken}`,
+      });
       const customToken = response.data.token;
       signInWithCustomToken(customToken);
     } catch (error) {

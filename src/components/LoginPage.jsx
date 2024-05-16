@@ -8,13 +8,20 @@ function LoginPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const clearErrorMessage = () => {
+    setErrorMessage("");
+  };
 
   const handleLogin = async () => {
     try {
       await signIn(username, password);
     } catch (error) {
       // Check if the error message exists and set the error message state accordingly
-      if (error.response && error.response.status === 400) {
+      if (
+        error.response &&
+        error.response.status === 400 &&
+        error.response.data.message == "Bad credentials"
+      ) {
         setErrorMessage("Invalid email or password"); // Customize error message based on your backend response
       } else {
         console.error("Login failed:", error.message);
@@ -24,21 +31,27 @@ function LoginPage() {
   };
 
   return (
-    <div className="login-container">
+    <div className="login-container mt-40">
       <form>
         <label htmlFor="username">Username:</label>
         <input
           type="text"
           id="username"
           value={username}
-          onChange={(e) => setUsername(e.target.value)}
+          onChange={(e) => {
+            setUsername(e.target.value);
+            clearErrorMessage();
+          }}
         />
         <label htmlFor="password">Password:</label>
         <input
           type="password"
           id="password"
           value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={(e) => {
+            setPassword(e.target.value);
+            clearErrorMessage();
+          }}
         />
         {errorMessage && <p className="error">{errorMessage}</p>}{" "}
         <button className="login-btn" type="button" onClick={handleLogin}>

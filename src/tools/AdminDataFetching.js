@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { USERNAME, PASSWORD } from "./config";
 import { getToken } from "./SignIn";
 import { baseUrl } from "./backendConfig";
-const axios = require("axios");
+import axios from "axios";
 
 export function useAdminDataFetching(url) {
   const [data, setData] = useState(null);
@@ -28,7 +28,7 @@ export function useAdminDataFetching(url) {
         setError(null);
       } catch (error) {
         setError(error);
-        // setLoading(false);
+        console.error(error);
       }
     }
 

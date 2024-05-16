@@ -1,15 +1,17 @@
 import React, { useState } from "react";
 import "../Styling/css/components/postSubmitted.css";
 import axios, { AxiosError } from "axios";
-
-import { baseUrl } from "../tools/backendConfig";
 import { useNavigate } from "react-router-dom";
+import postData from "../tools/DataPosting";
+import { useAuthHeader } from "react-auth-kit";
 function RegInfo() {
   const navigate = useNavigate();
+  const autha = useAuthHeader();
+  const userToken = autha().slice(6);
   const [errorMessage, setErrorMessage] = useState("");
   const [formData, setFormData] = useState({
     mobile: "",
-    address: "",
+    addressLine1: "",
     city: "",
     area: "",
     building: "",
@@ -52,21 +54,26 @@ function RegInfo() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("/api/register", formData);
-      // If registration is successful, do something with the response (e.g., redirect)
+      const response = await postData(
+        "api/user-address/add",
+        formData,
+        userToken
+      );
       console.log(response.data);
+      navigate("/");
     } catch (error) {
       if (error.response && error.response.status === 400) {
         // If the email is already in use, display an error message
         setErrorMessage(error.response.data.message); // Assuming the error message is sent from backend
       } else {
         // Handle other types of errors
+        console.log(formData);
         console.error("Registration failed:", error.message);
       }
     }
   };
   return (
-    <div className="post-submitted-card ">
+    <div className="post-submitted-card mt-32">
       <form onSubmit={handleSubmit} className="form-container">
         <input
           className="form-input"
@@ -80,7 +87,7 @@ function RegInfo() {
         <input
           className="form-input"
           type="text"
-          name="address"
+          name="addressLine1"
           placeholder="Street Address"
           value={formData.address}
           onChange={handleInputChange}

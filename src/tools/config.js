@@ -1,4 +1,4 @@
-let URL = "localhost:8080";
-let USERNAME = "ahmed@gmail.com";
-let PASSWORD = "12345";
-export { URL, USERNAME, PASSWORD };
+// let URL = "https://backend.gleeherb.com";
+let USERNAME = "mohamed.ahmed5858@gmail.com";
+let PASSWORD = "Mahmoud_123";
+export { USERNAME, PASSWORD };

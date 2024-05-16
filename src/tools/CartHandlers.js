@@ -22,21 +22,20 @@ export const handleIncrement = (dispatch, token, productId) => {
     });
   } else {
     setAuthToken(token);
+    dispatch({
+      type: "UPDATE_QUANTITY",
+      payload: {
+        productId,
+        quantity: 1, // Assuming the server increments by 1
+      },
+    });
     axios
       .put(`${baseUrl}/api/cart/item/${productId}`, 1, {
         headers: {
           "Content-Type": "application/json",
         },
       })
-      .then(() => {
-        dispatch({
-          type: "UPDATE_QUANTITY",
-          payload: {
-            productId,
-            quantity: 1, // Assuming the server increments by 1
-          },
-        });
-      })
+      .then(() => {})
       .catch((error) => {
         console.error("Error:", error);
       });
@@ -65,21 +64,20 @@ export const handleDecrement = (dispatch, productId, token, quantity) => {
 
   if (quantity > 1) {
     // Decrement quantity on the server
+    dispatch({
+      type: "UPDATE_QUANTITY",
+      payload: {
+        productId,
+        quantity: -1, // Assuming the server decrements by 1
+      },
+    });
     axios
       .put(`${baseUrl}/api/cart/item/${productId}`, -1, {
         headers: {
           "Content-Type": "application/json",
         },
       })
-      .then(() => {
-        dispatch({
-          type: "UPDATE_QUANTITY",
-          payload: {
-            productId,
-            quantity: -1, // Assuming the server decrements by 1
-          },
-        });
-      })
+      .then(() => {})
       .catch((error) => {
         console.error("Error:", error);
       });
@@ -102,18 +100,17 @@ export const handleRemove = (dispatch, token, productId) => {
   }
 
   setAuthToken(token);
+  dispatch({
+    type: "REMOVE_FROM_CART",
+    payload: {
+      productId,
+    },
+  });
   axios
     .delete(`${baseUrl}/api/cart/delete`, {
       params: { productId: productId },
     })
-    .then(() => {
-      dispatch({
-        type: "REMOVE_FROM_CART",
-        payload: {
-          productId,
-        },
-      });
-    })
+    .then(() => {})
     .catch((error) => {
       console.error("Error:", error);
     });
@@ -127,20 +124,20 @@ export const handleAddToCart = (dispatch, token, isAuth, product) => {
       product: product.id,
       quantity: 1, // Assuming adding an item adds 1 quantity
     };
+    dispatch({
+      type: "ADD_TO_CART",
+      payload: {
+        firstImage: product.firstImage,
+        title: product.title,
+        priceEg: parseInt(product.priceEg),
+        id: product.id,
+        weight: product.weight,
+        quantity: 1,
+      },
+    });
     axios
       .post(`${baseUrl}/api/cart/add`, cartItem)
-      .then(() => {
-        dispatch({
-          type: "ADD_TO_CART",
-          payload: {
-            firstImage: product.firstImage,
-            title: product.title,
-            priceEg: parseInt(product.price_eg),
-            id: product.id,
-            quantity: 1,
-          },
-        });
-      })
+      .then(() => {})
       .catch((error) => {
         console.error("Error:", error);
       });

@@ -55,9 +55,11 @@ const SignUpForm = () => {
         authState: {
           email: formData.email,
           isVerified: response.data.isVerified,
+          addressId: response.data.address,
         },
       });
       navigate("/address");
+      console.log(response.data);
     } catch (error) {
       if (error.response && error.response.status === 400) {
         // If the email is already in use, display an error message

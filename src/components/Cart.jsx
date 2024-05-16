@@ -3,7 +3,6 @@ import { Dialog, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { useAuthHeader, useIsAuthenticated } from "react-auth-kit";
 import { useCart } from "../tools/CartContext";
-import { cardPayment } from "../tools/Paymob";
 import { useNavigate } from "react-router-dom";
 
 import {
@@ -11,14 +10,15 @@ import {
   handleIncrement,
   handleRemove,
 } from "../tools/CartHandlers";
+import { fetchData } from "../tools/DataFetching";
 
 export default function Cart({ isCartOpen, toggleCart }) {
   const { cartItems, dispatch } = useCart();
   const [totalPrice, setTotalPrice] = useState(0);
   const autha = useAuthHeader();
+  const userToken = autha().slice(6);
   const isAuth = useIsAuthenticated();
   const navigate = useNavigate();
-  const userToken = autha().slice(6);
 
   useEffect(() => {
     setTotalPrice(() => {
@@ -27,7 +27,18 @@ export default function Cart({ isCartOpen, toggleCart }) {
       }, 0);
     });
   }, [cartItems]);
-  console.log(cartItems);
+  async function handlePayment() {
+    try {
+      const response = await fetchData("api/user-address", userToken);
+      if (response == null) {
+        navigate("/address");
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      navigate("/address");
+    }
+    isAuth() ? navigate("/checkout") : navigate("/login");
+  }
   return (
     <Transition.Root show={isCartOpen} as={Fragment}>
       <Dialog as="div" className="relative z-10" onClose={toggleCart}>
@@ -95,7 +106,13 @@ export default function Cart({ isCartOpen, toggleCart }) {
                                       <div>
                                         <div className="flex justify-between text-base font-medium text-gray-900">
                                           <h3>
-                                            <a href={`/product/${product.id}`}>
+                                            <a
+                                              href={
+                                                product.id < 100
+                                                  ? `/product/${product.id}`
+                                                  : "/"
+                                              }
+                                            >
                                               {product.title}
                                             </a>
                                           </h3>
@@ -194,9 +211,7 @@ export default function Cart({ isCartOpen, toggleCart }) {
                       <div className="mt-6">
                         <a
                           onClick={() => {
-                            isAuth()
-                              ? cardPayment(userToken)
-                              : navigate("/login");
+                            handlePayment();
                             toggleCart();
                           }}
                           className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700 cursor-pointer"
